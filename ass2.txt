@@ -1,0 +1,156 @@
+SQL> select job,sal
+  2  from emp
+  3  where job='MANAGER' and sal>1500;
+***********************************************************
+SQL> select* from emp
+  2  where sal>1200 and sal<2000;
+**********************************************************
+SQL> select*from emp
+  2  where sal=1600 or sal=800 or sal=1900;
+***********************************************************
+SQL> select* from emp
+  2  where ename like '%R_';
+*******************************************************
+SQL> select * from emp
+  2  where ename like 'A%N';
+******************************************************
+SQL> select sal,deptno
+  2  from emp
+  3  where sal>1250 and deptno=30;
+******************************************************
+SQL> select* from emp
+  2  where sal>=1250 and sal<=3000;
+*************************************************************
+SQL> select * from emp
+  2  where sal>1250 and sal<3000;
+*****************************************************
+SQL> select * from emp
+  2  where sal=3000 or sal=1250 or sal=2500;
+*************************************************************
+SQL> select* from emp
+  2  where ename in ('SMITH');
+************************************************************
+
+SQL> select* from emp
+  2  where ename like 'S%';
+**********************************************************
+SQL> select* from emp
+  2  where ename like '%S';
+*****************************************************
+SQL> select* from emp
+  2  where ename like '_I%';
+*****************************************************
+SQL> select * from emp
+  2  where ename like 'A%L%N';
+************************************************************
+SQL> select * from emp
+  2  where regexp_like(ename,'^A.B.*P$');
+*************************************************************
+SQL> select* from emp
+  2  where regexp_like(ename,'^A|^S|^W');
+************************************************************
+SQL> select job,max(sal),min(sal)
+  2  from emp
+  3  group by job;
+*********************************************************
+SQL> select count(*) from emp
+  2  where comm is null;
+********************************************************
+SQL> select sum(sal)
+  2  from emp
+  3  where deptno=10;
+*****************************************************
+SQL> select job,max(sal),min(sal),avg(sal)
+  2  from emp
+  3  group by job;
+******************************************************
+SQL> select deptno,max(sal)
+  2  from emp
+  3  where deptno>15
+  4  group by deptno
+  5  order by deptno;
+***********************************************************
+SQL> select deptno,sum(sal)
+  2  from emp
+  3  group by deptno
+  4  having sum(sal)>3000;
+******************************************************
+SQL> select deptno,count(*)
+  2  from emp
+  3  group by deptno
+  4  having count(*)>5;
+******************************************************
+SQL> select job,count(*)
+  2  from emp
+  3  where sal>2000
+  4  group by job;
+*******************************************************
+SQL> select lower(ename)||' '||lower(job) from emp;
+*****************************************************
+SQL> select lpad(ename||job,15,' ') from emp;
+*****************************************************
+SQL> select mgr,min(sal),max(sal),avg(sal) from emp where mgr is not null group by mgr ;
+********************************************************
+SQL> select deptno,sum(sal+nvl(comm,0)),avg(sal+nvl(comm,0)),count(*)
+  2  from emp
+  3  where sal>2000 and deptno=10 or deptno=20
+  4  group by deptno
+  5  order by deptno;
+*******************************************************
+SQL> select* from emp
+  2  where extract(month from hiredate)=2 and extract(year from hiredate)=1981 and sal>100;
+********************************************************
+SQL> select* from emp
+  2  where extract(month from hiredate)=8 or extract(month from hiredate)=5 or extract(month from hiredate)=12;
+********************************************************
+SQL> select ename, to_char(hiredate,'dd/mm/yy')
+  2  from emp
+  3  where job='CLERK' and comm is not null;
+**************************************************************
+SQL> select substr(ename,1,3) || substr(job,-2) empcode,empno,ename,job from emp;
+*************************************************************
+SQL> select empno,ename,to_char(nvl(comm,0),'$99,999.99')
+  2  from emp
+  3  where ename like 'A%N';
+*************************************************************
+SQL> select empno,ename,deptno,case when deptno=10 then 'HR'
+  2  when deptno=20 then 'admin'
+  3  when deptno=30 then 'accounts'
+  4  else 'purchase' end department
+  5  from emp;
+****************************************************************
+ create table marks(
+  2  studid number,
+  3  courseid number,
+  4  marks number,
+  5  constraint pk primary key(studid,courseid),
+  6  constraint fk_sid foreign key(studid) references student(sid) on delete cascade,
+  7  constraint fk_cid foreign key(courseid) references course(cid));
+*********************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
